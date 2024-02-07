@@ -1,11 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://m8cpsxur4qk"]
+[gd_scene load_steps=6 format=3 uid="uid://m8cpsxur4qk"]
 
 [ext_resource type="PackedScene" uid="uid://cj8igw0yycx66" path="res://scenes/grid_cell.tscn" id="1_4g0en"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_s27mn"]
 [ext_resource type="StyleBox" uid="uid://fd6wyhpf0103" path="res://resources/styles/background.tres" id="2_q7ume"]
+[ext_resource type="FontFile" uid="uid://bdsqu54vy6b62" path="res://assets/fonts/Unitblock/Unitblock.ttf" id="4_l48nr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_sdouf"]
-font_size = 32
+font = ExtResource("4_l48nr")
+font_size = 40
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.396078)
+shadow_offset = Vector2(3, 3)
 
 [node name="Game" type="CanvasLayer"]
 script = ExtResource("1_s27mn")
@@ -95,11 +101,15 @@ layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Score" type="Label" parent="."]
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.069
-offset_bottom = -21.712
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -61.5
+offset_right = 61.5
+offset_bottom = 46.0
 grow_horizontal = 2
+auto_translate = false
+localize_numeral_system = false
 text = "Score: 0"
 label_settings = SubResource("LabelSettings_sdouf")
 horizontal_alignment = 1
