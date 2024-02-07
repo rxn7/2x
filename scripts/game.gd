@@ -118,7 +118,7 @@ func merge_row(row: PackedInt32Array) -> bool:
 	for i in 3:
 		var curr_tile: Tile = tiles[row[i]]
 		var next_tile: Tile = tiles[row[i + 1]]
-		if curr_tile != null and next_tile != null and curr_tile.value == next_tile.value:
+		if curr_tile != null and next_tile != null and curr_tile.value != 0 and curr_tile.value == next_tile.value:
 			curr_tile.double()
 			score += curr_tile.value
 			remove_tile(row[i + 1])
