@@ -1,13 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://m8cpsxur4qk"]
+[gd_scene load_steps=7 format=3 uid="uid://m8cpsxur4qk"]
 
 [ext_resource type="PackedScene" uid="uid://cj8igw0yycx66" path="res://scenes/grid_cell.tscn" id="1_4g0en"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_s27mn"]
 [ext_resource type="StyleBox" uid="uid://fd6wyhpf0103" path="res://resources/styles/background.tres" id="2_q7ume"]
 [ext_resource type="FontFile" uid="uid://bdsqu54vy6b62" path="res://assets/fonts/Unitblock/Unitblock.ttf" id="4_l48nr"]
+[ext_resource type="Script" path="res://scripts/mobile_controls.gd" id="5_sjqim"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_sdouf"]
 font = ExtResource("4_l48nr")
-font_size = 40
+font_size = 70
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 5
 shadow_color = Color(0, 0, 0, 0.396078)
@@ -22,31 +23,33 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -278.0
-offset_right = 300.0
-offset_bottom = 322.0
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_q7ume")
 
 [node name="GridContainer" type="GridContainer" parent="Background"]
+custom_minimum_size = Vector2(512, 512)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -278.5
-offset_top = -278.5
-offset_right = 278.5
-offset_bottom = 278.5
+offset_left = -252.0
+offset_top = -252.0
+offset_right = 260.0
+offset_bottom = 260.0
 grow_horizontal = 2
 grow_vertical = 2
 auto_translate = false
 localize_numeral_system = false
-theme_override_constants/h_separation = 15
-theme_override_constants/v_separation = 15
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
 columns = 4
 
 [node name="GridCell" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
@@ -101,16 +104,31 @@ layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Score" type="Label" parent="."]
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -61.5
-offset_right = 61.5
-offset_bottom = 46.0
+anchor_bottom = 0.5
+offset_left = -107.0
+offset_top = -411.0
+offset_right = 108.0
+offset_bottom = -330.0
 grow_horizontal = 2
+grow_vertical = 2
 auto_translate = false
 localize_numeral_system = false
 text = "Score: 0"
 label_settings = SubResource("LabelSettings_sdouf")
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MobileControls" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("5_sjqim")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b3gibw5p3uhka"]
+[gd_scene load_steps=5 format=3 uid="uid://b3gibw5p3uhka"]
 
 [ext_resource type="Theme" uid="uid://csdrywwcvbwv2" path="res://resources/theme.tres" id="1_js76u"]
+[ext_resource type="StyleBox" uid="uid://dblgttr4knavr" path="res://resources/styles/tile_style.tres" id="2_1tyvt"]
 [ext_resource type="Script" path="res://scripts/tile.gd" id="2_mchcb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xq4g1"]
@@ -10,20 +11,21 @@ outline_size = 1
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Tile" type="Panel"]
-custom_minimum_size = Vector2(130, 130)
+custom_minimum_size = Vector2(122, 122)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -60.0
-offset_top = -60.0
-offset_right = 60.0
-offset_bottom = 60.0
+offset_left = -61.0
+offset_top = -61.0
+offset_right = 61.0
+offset_bottom = 61.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(60, 60)
 theme = ExtResource("1_js76u")
+theme_override_styles/panel = ExtResource("2_1tyvt")
 script = ExtResource("2_mchcb")
 
 [node name="Label" type="Label" parent="."]

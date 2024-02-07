@@ -3,7 +3,7 @@
 [ext_resource type="StyleBox" uid="uid://dr35oa7q8oumm" path="res://resources/styles/grid_cell.tres" id="1_pg6ik"]
 
 [node name="GridCell" type="Panel"]
-custom_minimum_size = Vector2(128, 128)
+custom_minimum_size = Vector2(120, 120)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
