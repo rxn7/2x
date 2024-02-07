@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://csdrywwcvbwv2"]
+
+[ext_resource type="StyleBox" uid="uid://dblgttr4knavr" path="res://resources/styles/tile_style.tres" id="1_5p81o"]
+[ext_resource type="StyleBox" uid="uid://dr35oa7q8oumm" path="res://resources/styles/grid_cell.tres" id="1_ovwtu"]
+[ext_resource type="FontFile" uid="uid://bdsqu54vy6b62" path="res://assets/fonts/Unitblock/Unitblock.ttf" id="2_b1rau"]
+
+[resource]
+default_font = ExtResource("2_b1rau")
+/styles/grid_cell = ExtResource("1_ovwtu")
+/styles/tile = ExtResource("1_5p81o")
+Panel/styles/panel = ExtResource("1_5p81o")

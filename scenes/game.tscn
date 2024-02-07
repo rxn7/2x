@@ -1,0 +1,106 @@
+[gd_scene load_steps=5 format=3 uid="uid://m8cpsxur4qk"]
+
+[ext_resource type="PackedScene" uid="uid://cj8igw0yycx66" path="res://scenes/grid_cell.tscn" id="1_4g0en"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_s27mn"]
+[ext_resource type="StyleBox" uid="uid://fd6wyhpf0103" path="res://resources/styles/background.tres" id="2_q7ume"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sdouf"]
+font_size = 32
+
+[node name="Game" type="CanvasLayer"]
+script = ExtResource("1_s27mn")
+
+[node name="Background" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -278.0
+offset_right = 300.0
+offset_bottom = 322.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_q7ume")
+
+[node name="GridContainer" type="GridContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -278.5
+offset_top = -278.5
+offset_right = 278.5
+offset_bottom = 278.5
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+localize_numeral_system = false
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
+columns = 4
+
+[node name="GridCell" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+layout_mode = 2
+
+[node name="GridCell2" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+layout_mode = 2
+
+[node name="GridCell3" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+layout_mode = 2
+
+[node name="GridCell4" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+layout_mode = 2
+
+[node name="GridCell5" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+layout_mode = 2
+
+[node name="GridCell6" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+layout_mode = 2
+
+[node name="GridCell7" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+layout_mode = 2
+
+[node name="GridCell8" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+layout_mode = 2
+
+[node name="GridCell9" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+layout_mode = 2
+
+[node name="GridCell10" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+layout_mode = 2
+
+[node name="GridCell11" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+layout_mode = 2
+
+[node name="GridCell12" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+layout_mode = 2
+
+[node name="GridCell13" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+layout_mode = 2
+
+[node name="GridCell14" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+layout_mode = 2
+
+[node name="GridCell15" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+layout_mode = 2
+
+[node name="GridCell16" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+layout_mode = 2
+
+[node name="Tiles" type="Node" parent="."]
+metadata/_edit_use_anchors_ = true
+
+[node name="Score" type="Label" parent="."]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.069
+offset_bottom = -21.712
+grow_horizontal = 2
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_sdouf")
+horizontal_alignment = 1
+vertical_alignment = 1
