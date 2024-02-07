@@ -28,10 +28,6 @@ window/stretch/aspect="expand"
 
 project/assembly_name="gd^2"
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/godot_vim/plugin.cfg")
-
 [file_customization]
 
 folder_colors={
@@ -70,7 +66,8 @@ slide_down={
 
 [rendering]
 
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.156863, 0.156863, 0.156863, 1)
 viewport/hdr_2d=true

@@ -88,6 +88,9 @@ func slide(horizontal: bool, reverse: bool) -> void:
 	if move_made:
 		spawn_random_tile()
 
+	if !is_any_move_possible():
+		restart()	
+
 func slide_up() -> void: slide(false, false)
 func slide_down() -> void: slide(false, true)
 func slide_left() -> void: slide(true, false)
@@ -126,6 +129,29 @@ func merge_row(row: PackedInt32Array) -> bool:
 			move_made = true
 
 	return move_made
+
+func is_any_move_possible() -> bool:
+	for x in range(4):
+		for y in range(4):
+			var curr_tile: Tile = tiles[xy_to_index(x, y)]
+
+			# Empty cell is available
+			if curr_tile == null:
+				return true
+
+			# Check if horizontal move is possible
+			if x < 3:
+				var other_tile: Tile = tiles[xy_to_index(x + 1, y)]
+				if other_tile != null and curr_tile.value == other_tile.value:
+					return true
+
+			# Check if vertical move is possible
+			if y < 3:
+				var other_tile = tiles[xy_to_index(x, y + 1)]
+				if other_tile != null and curr_tile.value == other_tile.value:
+					return true
+			
+	return false
 
 func spawn_random_tile(wait_for_move_animation: bool = true) -> void:
 	var free_indices: PackedInt32Array = []
