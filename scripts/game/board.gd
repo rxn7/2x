@@ -3,16 +3,21 @@ class_name Board
 const TILE_SCENE: PackedScene = preload("res://scenes/tile.tscn")
 
 signal changed
-var tiles: Array[Tile]
+signal tile_merged(value: int)
 
-func _init() -> void:
+var tiles: Array[Tile]
+var tile_container: Node
+var game: Game
+
+func _init(_game: Game, _tile_container: Node) -> void:
+	game = _game
+	tile_container = _tile_container
 	tiles.resize(16)
 
 func restart() -> void:
 	for t in tiles:
 		if t != null:
 			t.queue_free()
-
 	tiles.fill(null)
 	
 	for i in 2:
@@ -54,7 +59,7 @@ func slide_row(row: PackedInt32Array) -> bool:
 	for i in range(non_empty_tiles.size()):
 		var tile: Tile = non_empty_tiles[i]
 		tiles[row[i]] = tile
-		tile.update_position(row[i])
+		tile.update_position(game.grid_container.get_child(row[i]))
 
 	return move_made
 
@@ -85,15 +90,19 @@ func merge_row(row: PackedInt32Array) -> bool:
 		if curr_tile == null or next_tile == null or curr_tile.value == 0 or curr_tile.value != next_tile.value:
 			continue
 			
-		curr_tile.double()
-		Game.instance.score += curr_tile.value
 		remove_tile(row[i + 1])
+
+		curr_tile.value *= 2
+		curr_tile.play_merge_effects()
+		tile_merged.emit(curr_tile.value)
+
 		merged = true
 
 	return merged
 
 func spawn_random_tile(wait_for_move_animation: bool = true) -> void:
 	var free_indices: PackedInt32Array = []
+
 	# Find empty cells
 	for idx in 16:
 		if tiles[idx] == null:
@@ -108,13 +117,12 @@ func spawn_random_tile(wait_for_move_animation: bool = true) -> void:
 	var value: int = 4 if randf() >= 0.9 else 2
 	
 	var tile: Tile = TILE_SCENE.instantiate()
-	Game.instance.tile_container.add_child(tile)
+	tile_container.add_child(tile)
 	tiles[index] = tile
 
-	tile.update_position(index)
+	tile.update_position(game.grid_container.get_child(index))
 	tile.pop_up(wait_for_move_animation)
 	tile.value = value
-
 
 func is_any_move_possible() -> bool:
 	for x in range(4):

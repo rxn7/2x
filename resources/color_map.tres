@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ColorMap" load_steps=2 format=3 uid="uid://dadt3nuf8x7or"]
 
-[ext_resource type="Script" path="res://scripts/color_map.gd" id="1_isb77"]
+[ext_resource type="Script" path="res://scripts/resources/color_map.gd" id="1_isb77"]
 
 [resource]
 script = ExtResource("1_isb77")

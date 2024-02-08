@@ -36,7 +36,7 @@ func create_new_player() -> AudioStreamPlayer:
 	pool_size += 1
 
 	var p: AudioStreamPlayer = AudioStreamPlayer.new()
-	p.connect("finished", func(): on_player_finished(p))
+	p.finished.connect(func(): on_player_finished(p))
 
 	add_child(p)
 	return p

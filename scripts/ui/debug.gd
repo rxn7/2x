@@ -1,4 +1,3 @@
-class_name Debug
 extends Control
 
 const FONT_SIZE: int = 16
@@ -8,20 +7,19 @@ const ALTERNATING_COLORS: Array[Color] = [Color.HOT_PINK, Color.PINK]
 var text_y: float = 0
 var text_x: float = 0
 var alternate_idx: int = 0
+@export var game: Game
 
 func _ready() -> void:
 	if !OS.has_feature("debug"):
 		visible = false
 		queue_free()
 		return
-
-	Game.instance.board.connect("changed", func(): queue_redraw())
-
+	
 	var redraw_timer = Timer.new()
 	redraw_timer.autostart = true
 	redraw_timer.one_shot = false
 	redraw_timer.wait_time = REDRAW_INTERVAL
-	redraw_timer.connect("timeout", func(): queue_redraw())
+	redraw_timer.timeout.connect(queue_redraw)
 	add_child(redraw_timer)
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -35,7 +33,7 @@ func _draw() -> void:
 
 	for y in 4:
 		for x in 4:
-			var tile: Tile = Game.instance.board.tiles[Board.xy_to_index(x, y)] 
+			var tile: Tile = game.board.tiles[Board.xy_to_index(x, y)] 
 			var text: String
 
 			text = "[0000]" if tile == null else "[%04d]" % tile.value

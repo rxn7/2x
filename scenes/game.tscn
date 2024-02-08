@@ -1,11 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://m8cpsxur4qk"]
+[gd_scene load_steps=11 format=3 uid="uid://m8cpsxur4qk"]
 
 [ext_resource type="PackedScene" uid="uid://cj8igw0yycx66" path="res://scenes/grid_cell.tscn" id="1_4g0en"]
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_s27mn"]
+[ext_resource type="Script" path="res://scripts/game/game.gd" id="1_dciia"]
 [ext_resource type="StyleBox" uid="uid://fd6wyhpf0103" path="res://resources/styles/background.tres" id="2_q7ume"]
+[ext_resource type="Script" path="res://scripts/game/ui/game_ui.gd" id="4_0weuj"]
 [ext_resource type="FontFile" uid="uid://bdsqu54vy6b62" path="res://assets/fonts/Unitblock/Unitblock.ttf" id="4_l48nr"]
-[ext_resource type="Script" path="res://scripts/mobile_controls.gd" id="5_sjqim"]
 [ext_resource type="Texture2D" uid="uid://q3jyyrk82ksf" path="res://assets/textures/restart.png" id="6_bdh0s"]
+[ext_resource type="Script" path="res://scripts/game/controls/mobile_control.gd" id="7_qt0g4"]
+[ext_resource type="Script" path="res://scripts/game/controls/keyboard_control.gd" id="8_7x6aj"]
+[ext_resource type="Script" path="res://scripts/ui/debug.gd" id="9_5147w"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_sdouf"]
 font = ExtResource("4_l48nr")
@@ -16,9 +19,24 @@ shadow_color = Color(0, 0, 0, 0.396078)
 shadow_offset = Vector2(3, 3)
 
 [node name="Game" type="CanvasLayer"]
-script = ExtResource("1_s27mn")
+script = ExtResource("1_dciia")
 
-[node name="Background" type="Panel" parent="."]
+[node name="Grid" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="Grid"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -33,7 +51,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_q7ume")
 
-[node name="GridContainer" type="GridContainer" parent="Background"]
+[node name="Container" type="GridContainer" parent="Grid"]
 custom_minimum_size = Vector2(512, 512)
 layout_mode = 1
 anchors_preset = 8
@@ -53,66 +71,76 @@ theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 columns = 4
 
-[node name="GridCell" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+[node name="GridCell" parent="Grid/Container" instance=ExtResource("1_4g0en")]
 layout_mode = 2
 
-[node name="GridCell2" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+[node name="GridCell2" parent="Grid/Container" instance=ExtResource("1_4g0en")]
 layout_mode = 2
 
-[node name="GridCell3" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+[node name="GridCell3" parent="Grid/Container" instance=ExtResource("1_4g0en")]
 layout_mode = 2
 
-[node name="GridCell4" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+[node name="GridCell4" parent="Grid/Container" instance=ExtResource("1_4g0en")]
 layout_mode = 2
 
-[node name="GridCell5" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+[node name="GridCell5" parent="Grid/Container" instance=ExtResource("1_4g0en")]
 layout_mode = 2
 
-[node name="GridCell6" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+[node name="GridCell6" parent="Grid/Container" instance=ExtResource("1_4g0en")]
 layout_mode = 2
 
-[node name="GridCell7" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+[node name="GridCell7" parent="Grid/Container" instance=ExtResource("1_4g0en")]
 layout_mode = 2
 
-[node name="GridCell8" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+[node name="GridCell8" parent="Grid/Container" instance=ExtResource("1_4g0en")]
 layout_mode = 2
 
-[node name="GridCell9" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+[node name="GridCell9" parent="Grid/Container" instance=ExtResource("1_4g0en")]
 layout_mode = 2
 
-[node name="GridCell10" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+[node name="GridCell10" parent="Grid/Container" instance=ExtResource("1_4g0en")]
 layout_mode = 2
 
-[node name="GridCell11" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+[node name="GridCell11" parent="Grid/Container" instance=ExtResource("1_4g0en")]
 layout_mode = 2
 
-[node name="GridCell12" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+[node name="GridCell12" parent="Grid/Container" instance=ExtResource("1_4g0en")]
 layout_mode = 2
 
-[node name="GridCell13" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+[node name="GridCell13" parent="Grid/Container" instance=ExtResource("1_4g0en")]
 layout_mode = 2
 
-[node name="GridCell14" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+[node name="GridCell14" parent="Grid/Container" instance=ExtResource("1_4g0en")]
 layout_mode = 2
 
-[node name="GridCell15" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+[node name="GridCell15" parent="Grid/Container" instance=ExtResource("1_4g0en")]
 layout_mode = 2
 
-[node name="GridCell16" parent="Background/GridContainer" instance=ExtResource("1_4g0en")]
+[node name="GridCell16" parent="Grid/Container" instance=ExtResource("1_4g0en")]
 layout_mode = 2
 
-[node name="Tiles" type="Node" parent="."]
+[node name="TileContainer" type="Node" parent="."]
 metadata/_edit_use_anchors_ = true
 
-[node name="Score" type="Label" parent="."]
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_0weuj")
+
+[node name="Score" type="Label" parent="UI"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -107.0
+offset_left = -107.5
 offset_top = -410.0
-offset_right = 108.0
+offset_right = 107.5
 offset_bottom = -329.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -123,17 +151,8 @@ label_settings = SubResource("LabelSettings_sdouf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MobileControls" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-script = ExtResource("5_sjqim")
-
-[node name="Restart" type="TextureButton" parent="."]
+[node name="Restart" type="TextureButton" parent="UI"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -151,3 +170,23 @@ size_flags_stretch_ratio = 20.0
 action_mode = 0
 texture_normal = ExtResource("6_bdh0s")
 stretch_mode = 5
+
+[node name="Controls" type="Node" parent="."]
+
+[node name="MobileControl" type="Node" parent="Controls"]
+script = ExtResource("7_qt0g4")
+
+[node name="KeyboardControl" type="Node" parent="Controls"]
+script = ExtResource("8_7x6aj")
+
+[node name="Debug" type="Control" parent="." node_paths=PackedStringArray("game")]
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("9_5147w")
+game = NodePath("..")

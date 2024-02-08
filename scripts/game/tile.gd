@@ -9,7 +9,7 @@ const MERGE_PARTICLES_SCENE: PackedScene = preload("res://scenes/merge_particles
 
 const COLOR_MAP: ColorMap = preload("res://resources/color_map.tres")
 
-@onready var label = $Label
+@onready var label: Label = $Label
 
 var position_tween: Tween
 var target_position: Vector2
@@ -31,20 +31,16 @@ func pop_up(wait_for_move_animation: bool = true) -> void:
 	tween.tween_property(self, "scale", Vector2.ONE, APPEAR_ANIMATION_TIME).set_trans(Tween.TRANS_BACK)
 	tween.tween_property(self, "self_modulate:a", 1.0, APPEAR_ANIMATION_TIME).set_trans(Tween.TRANS_BACK)
 
-func double() -> void:
-	value *= 2
-
+func play_merge_effects() -> void:
 	spawn_merge_particles()
 	
 	var tween: Tween = create_tween().set_trans(Tween.TRANS_LINEAR)
 	tween.tween_property(self, "scale", Vector2.ONE * 1.1, DOUBLE_ANIMATION_TIME)
 	tween.tween_property(self, "scale", Vector2.ONE, DOUBLE_ANIMATION_TIME)
 
-func update_position(idx: int) -> void:
-	var grid_cell: Control = Game.instance.grid_container.get_child(idx)
-	target_position = grid_cell.global_position - Vector2.ONE
-	
+func update_position(target_cell: Control) -> void:
 	var just_appeared: bool = value == 0
+	target_position = target_cell.global_position - Vector2(size.x - target_cell.size.x, size.y - target_cell.size.y)
 	if just_appeared:
 		position = target_position
 	else:
@@ -56,12 +52,13 @@ func update_position(idx: int) -> void:
 
 func spawn_merge_particles() -> void:
 	var particles: GPUParticles2D = MERGE_PARTICLES_SCENE.instantiate()
-	Game.instance.add_child(particles)
+    # TODO: THIS IS TERRIBLE
+	get_parent().get_parent().add_child(particles)
 	particles.self_modulate = self_modulate
 	particles.amount = value
 	particles.global_position = target_position + pivot_offset
 	particles.emitting = true
-	particles.connect("finished", func(): particles.queue_free())
+	particles.finished.connect(particles.queue_free)
 
 func get_color() -> Color:
 	return COLOR_MAP.get_color(value)

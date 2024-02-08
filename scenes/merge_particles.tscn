@@ -27,6 +27,7 @@ hue_variation_max = 0.15
 turbulence_enabled = true
 
 [node name="MergeParticles" type="GPUParticles2D"]
+z_index = 10
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_4hsxc")
 one_shot = true

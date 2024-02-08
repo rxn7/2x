@@ -1,5 +1,6 @@
-class_name MobileControls
 extends Node
+
+const InputAction = preload("res://scripts/game/controls/input_action.gd").InputAction
 
 const SWIPE_THRESHOLD: float = 100.0
 
@@ -23,12 +24,12 @@ func _input(event: InputEvent):
 		if abs(swipe.x) > SWIPE_THRESHOLD:
 			swiping = false
 			if swipe.x > 0:
-				Game.instance.slide_right()
+				Events.input.emit(InputAction.SlideRight)
 			else:
-				Game.instance.slide_left()
+				Events.input.emit(InputAction.SlideLeft)
 		elif abs(swipe.y) > SWIPE_THRESHOLD:
 			swiping = false
 			if swipe.y < 0:
-				Game.instance.slide_up()
+				Events.input.emit(InputAction.SlideUp)
 			else:
-				Game.instance.slide_down()
+				Events.input.emit(InputAction.SlideDown)
