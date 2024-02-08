@@ -1,4 +1,4 @@
-# 2ˣ
+<img src="assets/textures/icon.png" width="128">
 2048-like game made in Godot 4.2.
 
 # Platforms
