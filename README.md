@@ -10,4 +10,4 @@ Playable on:
 - LG LMXS28596S 28 Cu. Ft. Stainless French-Door Smart Wi-Fi Enabled Refrigerator 🤓
 
 # Itch.io
-You can play it now on itch 
+You can play it now on [itch](https://rxn7.itch.io/2x)!
