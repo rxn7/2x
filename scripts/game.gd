@@ -49,10 +49,10 @@ func slide(horizontal: bool, reverse: bool) -> void:
 		if !board.is_any_move_possible():
 			restart()
 
-		if result.merged:
-			SoundManager.play_merge_sound()
-		else:
-			SoundManager.play_spawn_sound()
+	if result.merged:
+		SoundManager.play_merge_sound()
+	else:
+		SoundManager.play_spawn_sound()
 
 func update_score_label(_score: int) -> void:
 	score = _score

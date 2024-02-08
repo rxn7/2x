@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://p5bq4xyrroad"
-path="res://.godot/imported/spawn_tile2.wav-0395de616d37f44ba3a0d1056afc2b67.sample"
+path="res://.godot/imported/spawn_tile2.wav-6a1bbd030de983dbe05905134ed0c9a7.sample"
 
 [deps]
 
-source_file="res://assets/audio/spawn_tile2.wav"
-dest_files=["res://.godot/imported/spawn_tile2.wav-0395de616d37f44ba3a0d1056afc2b67.sample"]
+source_file="res://assets/audio/spawn_tile/spawn_tile2.wav"
+dest_files=["res://.godot/imported/spawn_tile2.wav-6a1bbd030de983dbe05905134ed0c9a7.sample"]
 
 [params]
 

@@ -4,6 +4,7 @@ const TILE_SCENE: PackedScene = preload("res://scenes/tile.tscn")
 
 signal changed
 var tiles: Array[Tile]
+var last_slide_result: SlideResult
 
 func _init() -> void:
 	tiles.resize(16)
@@ -31,6 +32,10 @@ func slide(horizontal: bool, reverse: bool) -> SlideResult:
 		result.moved = slide_row(row) or result.moved
 		result.merged = merge_row(row) or result.merged
 		result.moved = slide_row(row) or result.moved
+	
+	if result.moved or result.merged:
+		changed.emit()
+		last_slide_result = result
 
 	return result
 
@@ -73,7 +78,7 @@ func generate_slide_rows(horizontal: bool, reverse: bool) -> Array[PackedInt32Ar
 	return rows
 
 func merge_row(row: PackedInt32Array) -> bool:
-	var move_made: bool = false
+	var merged: bool = false
 	for i in 3:
 		var curr_tile: Tile = tiles[row[i]]
 		var next_tile: Tile = tiles[row[i + 1]]
@@ -84,10 +89,9 @@ func merge_row(row: PackedInt32Array) -> bool:
 		curr_tile.double()
 		Game.instance.score += curr_tile.value
 		remove_tile(row[i + 1])
+		merged = true
 
-		move_made = true
-
-	return move_made
+	return merged
 
 func spawn_random_tile(wait_for_move_animation: bool = true) -> void:
 	var free_indices: PackedInt32Array = []

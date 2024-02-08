@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://cg7uwhvi0g6k6"
-path="res://.godot/imported/merge.wav-30bf96807bdff458e4d461e4e7203f40.sample"
+uid="uid://d1v7dpx522dt8"
+path="res://.godot/imported/merge.wav-1d1f6a0936207e42fdd9823267c2812d.sample"
 
 [deps]
 
-source_file="res://assets/audio/merge.wav"
-dest_files=["res://.godot/imported/merge.wav-30bf96807bdff458e4d461e4e7203f40.sample"]
+source_file="res://assets/audio/merge/merge.wav"
+dest_files=["res://.godot/imported/merge.wav-1d1f6a0936207e42fdd9823267c2812d.sample"]
 
 [params]
 
