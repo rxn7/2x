@@ -5,6 +5,7 @@ const InputAction = preload("res://scripts/game/controls/input_action.gd").Input
 
 @onready var grid_container: GridContainer = $Grid/Container
 @onready var board: Board = Board.new(self, $TileContainer)
+var freeze: bool = false
 var score: int = 0: 
 	set(value):
 		score = value
@@ -24,6 +25,9 @@ func restart() -> void:
 	SoundManager.play_spawn_sound()
 
 func on_input(action: InputAction) -> void:
+	if freeze:
+		return
+
 	match action:
 		InputAction.SlideUp:
 			slide_up()

@@ -129,9 +129,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Game" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("4_0weuj")
 
-[node name="Score" type="Label" parent="UI"]
+[node name="Score" type="Label" parent="UI/Game"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -151,7 +159,7 @@ label_settings = SubResource("LabelSettings_sdouf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Restart" type="TextureButton" parent="UI"]
+[node name="Restart" type="TextureButton" parent="UI/Game"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -171,6 +179,11 @@ action_mode = 0
 texture_normal = ExtResource("6_bdh0s")
 stretch_mode = 5
 
+[node name="GameOver" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="Controls" type="Node" parent="."]
 
 [node name="MobileControl" type="Node" parent="Controls"]
@@ -180,7 +193,6 @@ script = ExtResource("7_qt0g4")
 script = ExtResource("8_7x6aj")
 
 [node name="Debug" type="Control" parent="." node_paths=PackedStringArray("game")]
-z_index = 100
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
