@@ -13,6 +13,7 @@ func _ready() -> void:
 	var tween: Tween = create_tween()
 	tween.tween_property(self, "position", target_position, 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(self, "self_modulate:a", 0.0, ALPHA_ANIMATION_DURATION).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN).set_delay(POSITION_ANIMATION_DURATION - ALPHA_ANIMATION_DURATION)
+	tween.finished.connect(func(): queue_free())
 
 func set_value(value: int) -> void:
 	self_modulate = Tile.COLOR_MAP.get_color(value)
