@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://tywk36mgeg43"]
+
+[ext_resource type="FontFile" uid="uid://bdsqu54vy6b62" path="res://assets/fonts/Unitblock/Unitblock.ttf" id="1_ut6i6"]
+[ext_resource type="Script" path="res://scripts/game/ui/score_popup.gd" id="2_m14vh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5m487"]
+font = ExtResource("1_ut6i6")
+font_size = 32
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
+[node name="ScorePopUp" type="Label"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "+4"
+label_settings = SubResource("LabelSettings_5m487")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_m14vh")

@@ -8,8 +8,9 @@ const InputAction = preload("res://scripts/game/controls/input_action.gd").Input
 var freeze: bool = false
 var score: int = 0: 
 	set(value):
+		var change: int = value - score
 		score = value
-		Events.score_changed.emit(value)
+		Events.score_changed.emit(value, change)
 
 func _ready() -> void:
 	Events.input.connect(on_input)
