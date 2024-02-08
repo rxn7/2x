@@ -1,7 +1,7 @@
 class_name MobileControls
 extends Node
 
-const SWIPE_THRESHOLD = 100
+const SWIPE_THRESHOLD: float = 100.0
 
 var swipe_start_position: Vector2
 var swiping: bool = false
