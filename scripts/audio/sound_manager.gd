@@ -1,30 +1,43 @@
 extends Node
 
-const POOL_SIZE = 12
+const INIT_POOL_SIZE = 6
 
-var available: Array = []
-var queue: Array = []
+var available_players: Array = []
+var pool_size: int = 0
 
 func _ready() -> void:
-	for _i in range(POOL_SIZE):
-		var p: AudioStreamPlayer = AudioStreamPlayer.new()
-		add_child(p)
-		available.push_back(p)
-		p.connect("finished", func(): on_player_finished(p))
+	for _i in INIT_POOL_SIZE:
+		available_players.push_back(create_new_player())
 
 func on_player_finished(player: AudioStreamPlayer) -> void:
-	available.push_back(player)
+	available_players.push_back(player)
 
+## If pool is empty, creates a new player
 func play(sound: Sound) -> void:
-	while(queue.size() > POOL_SIZE):
-		queue.pop_back()
+	var player: AudioStreamPlayer
+	if !available_players.is_empty():
+		player = available_players.pop_back()
+	else:
+		player = create_new_player()
 
-	queue.append(sound)
+	_play(player, sound)
 
-func _process(_delta: float) -> void:
-	if not queue.is_empty() and not available.is_empty():
-		var p: AudioStreamPlayer = available.pop_front()
-		var s: Sound = queue.pop_front()
-		p.stream = s.stream
-		p.pitch_scale = s.pitch
-		p.play()
+func _play(player: AudioStreamPlayer, sound: Sound) -> void:
+	player.stream = sound.stream
+	player.pitch_scale = sound.pitch
+	player.play()
+
+func play_spawn_sound() -> void:
+	play(Sound.new(SoundLibrary.SPAWN_SOUNDS.pick_random(), randf_range(0.7, 1.3)))
+
+func play_merge_sound() -> void:
+	play(Sound.new(SoundLibrary.MERGE_SOUNDS.pick_random(), randf_range(0.7, 1.3)))
+
+func create_new_player() -> AudioStreamPlayer:
+	pool_size += 1
+
+	var p: AudioStreamPlayer = AudioStreamPlayer.new()
+	p.connect("finished", func(): on_player_finished(p))
+
+	add_child(p)
+	return p

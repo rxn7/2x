@@ -15,7 +15,7 @@ func _ready() -> void:
 		queue_free()
 		return
 
-	Game.instance.connect("board_changed", func(): queue_redraw())
+	Game.instance.board.connect("changed", func(): queue_redraw())
 
 	var redraw_timer = Timer.new()
 	redraw_timer.autostart = true
@@ -49,8 +49,8 @@ func _draw() -> void:
 	draw_debug_string("GPU: %s" % RenderingServer.get_video_adapter_name())
 	draw_debug_string("CPU: %s" % OS.get_processor_name())
 
-	draw_debug_string("NODES: %d" % Performance.get_monitor(Performance.OBJECT_NODE_COUNT))
-	draw_debug_string("OBJECTS: %d" % Performance.get_monitor(Performance.OBJECT_COUNT))
+	draw_debug_string("OBJECTS: %d (NODES: %d)" % [Performance.get_monitor(Performance.OBJECT_COUNT), Performance.get_monitor(Performance.OBJECT_NODE_COUNT)])
+	draw_debug_string("AUDIO POOL: %d (%d PLAYING)" % [SoundManager.pool_size, SoundManager.pool_size - SoundManager.available_players.size()])
 	draw_debug_string("STAT MEM: %s (MAX: %s)" % [String.humanize_size(Performance.get_monitor(Performance.MEMORY_STATIC)), String.humanize_size(Performance.get_monitor(Performance.MEMORY_STATIC_MAX))])
 	draw_debug_string("RENDER BUF: %s" % String.humanize_size(Performance.get_monitor(Performance.RENDER_BUFFER_MEM_USED)))
 	draw_debug_string("MSG BUF: %s" % String.humanize_size(Performance.get_monitor(Performance.MEMORY_MESSAGE_BUFFER_MAX)))

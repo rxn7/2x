@@ -24,14 +24,15 @@ func remove_tile(idx: int) -> void:
 	tiles[idx].queue_free()
 	tiles[idx] = null
 
-func slide(horizontal: bool, reverse: bool) -> bool:
-	var move_made: bool = false 
-	for row in generate_slide_rows(horizontal, reverse):
-		move_made = slide_row(row) or move_made
-		move_made = merge_row(row) or move_made
-		move_made = slide_row(row) or move_made
+func slide(horizontal: bool, reverse: bool) -> SlideResult:
+	var result: SlideResult = SlideResult.new()
 
-	return move_made
+	for row in generate_slide_rows(horizontal, reverse):
+		result.moved = slide_row(row) or result.moved
+		result.merged = merge_row(row) or result.merged
+		result.moved = slide_row(row) or result.moved
+
+	return result
 
 func slide_row(row: PackedInt32Array) -> bool:
 	var move_made: bool = false

@@ -3,8 +3,6 @@ extends CanvasLayer
 
 static var instance: Game
 
-signal board_changed
-
 @onready var grid_container: GridContainer = $Background/GridContainer
 @onready var tile_container: Node = $Tiles
 @onready var score_label: Label = $Score
@@ -40,16 +38,21 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func restart() -> void:
 	score = 0
 	board.restart()
+	SoundManager.play_spawn_sound()
 
 func slide(horizontal: bool, reverse: bool) -> void:
-	var move_made: bool = board.slide(horizontal, reverse)
+	var result: SlideResult = board.slide(horizontal, reverse)
 
-	if move_made:
+	if result.moved:
 		board.spawn_random_tile(true)
-		if !board.is_any_move_possible():
-			restart()	
 
-	board_changed.emit()
+		if !board.is_any_move_possible():
+			restart()
+
+		if result.merged:
+			SoundManager.play_merge_sound()
+		else:
+			SoundManager.play_spawn_sound()
 
 func update_score_label(_score: int) -> void:
 	score = _score
