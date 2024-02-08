@@ -1,9 +1,14 @@
 {
 	"disabled_build_options": {
+		"brotli": false,
+		"disable_2d_physics": true,
 		"disable_3d": true,
 		"disable_3d_physics": true,
 		"disable_navigation": true,
-		"openxr": false
+		"graphite": false,
+		"openxr": false,
+		"rendering_device": false,
+		"vulkan": false
 	},
 	"disabled_classes": [
 		"AESContext",
