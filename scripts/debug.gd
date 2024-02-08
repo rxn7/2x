@@ -35,7 +35,7 @@ func _draw() -> void:
 
 	for y in 4:
 		for x in 4:
-			var tile: Tile = Game.instance.tiles[Game.xy_to_index(x, y)] 
+			var tile: Tile = Game.instance.board.tiles[Board.xy_to_index(x, y)] 
 			var text: String
 
 			text = "[0000]" if tile == null else "[%04d]" % tile.value

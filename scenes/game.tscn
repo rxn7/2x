@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://m8cpsxur4qk"]
+[gd_scene load_steps=8 format=3 uid="uid://m8cpsxur4qk"]
 
 [ext_resource type="PackedScene" uid="uid://cj8igw0yycx66" path="res://scenes/grid_cell.tscn" id="1_4g0en"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_s27mn"]
 [ext_resource type="StyleBox" uid="uid://fd6wyhpf0103" path="res://resources/styles/background.tres" id="2_q7ume"]
 [ext_resource type="FontFile" uid="uid://bdsqu54vy6b62" path="res://assets/fonts/Unitblock/Unitblock.ttf" id="4_l48nr"]
 [ext_resource type="Script" path="res://scripts/mobile_controls.gd" id="5_sjqim"]
+[ext_resource type="Texture2D" uid="uid://q3jyyrk82ksf" path="res://assets/textures/restart.png" id="6_bdh0s"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_sdouf"]
 font = ExtResource("4_l48nr")
@@ -110,9 +111,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -107.0
-offset_top = -411.0
+offset_top = -410.0
 offset_right = 108.0
-offset_bottom = -330.0
+offset_bottom = -329.0
 grow_horizontal = 2
 grow_vertical = 2
 auto_translate = false
@@ -121,7 +122,6 @@ text = "Score: 0"
 label_settings = SubResource("LabelSettings_sdouf")
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="MobileControls" type="Control" parent="."]
 layout_mode = 3
@@ -132,3 +132,22 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("5_sjqim")
+
+[node name="Restart" type="TextureButton" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = 310.0
+offset_right = 50.0
+offset_bottom = 410.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+action_mode = 0
+texture_normal = ExtResource("6_bdh0s")
+stretch_mode = 5

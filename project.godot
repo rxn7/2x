@@ -13,6 +13,8 @@ config_version=5
 config/name="2^x"
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
+boot_splash/bg_color=Color(0.156863, 0.156863, 0.156863, 1)
+boot_splash/image="res://assets/textures/splash_screen.png"
 config/icon="res://icon.svg"
 
 [autoload]
@@ -34,10 +36,16 @@ window/vsync/vsync_mode=3
 
 project/assembly_name="gd^2"
 
+[editor]
+
+movie_writer/mjpeg_quality=1.0
+movie_writer/movie_file="/tpm/test.avi"
+
 [file_customization]
 
 folder_colors={
 "res://assets/": "pink",
+"res://builds/": "orange",
 "res://resources/": "yellow",
 "res://scenes/": "purple",
 "res://scripts/": "green"
