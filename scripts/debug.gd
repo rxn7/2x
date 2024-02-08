@@ -51,19 +51,6 @@ func _draw() -> void:
 
 	draw_debug_string("OBJECTS: %d (NODES: %d)" % [Performance.get_monitor(Performance.OBJECT_COUNT), Performance.get_monitor(Performance.OBJECT_NODE_COUNT)])
 	draw_debug_string("AUDIO POOL: %d (%d PLAYING)" % [SoundManager.pool_size, SoundManager.playing_count])
-
-	if Game.instance.board.last_slide_result != null:
-		var string: String = ""
-
-		if Game.instance.board.last_slide_result.moved:
-			string = "MOVED"
-			if Game.instance.board.last_slide_result.merged:
-				string += ", MERGED"
-		elif Game.instance.board.last_slide_result.merged:
-			string = "MERGED"
-
-		draw_debug_string("SLIDE (%s)" % string)
-
 	draw_debug_string("STAT MEM: %s (MAX: %s)" % [String.humanize_size(Performance.get_monitor(Performance.MEMORY_STATIC)), String.humanize_size(Performance.get_monitor(Performance.MEMORY_STATIC_MAX))])
 	draw_debug_string("RENDER BUF: %s" % String.humanize_size(Performance.get_monitor(Performance.RENDER_BUFFER_MEM_USED)))
 	draw_debug_string("MSG BUF: %s" % String.humanize_size(Performance.get_monitor(Performance.MEMORY_MESSAGE_BUFFER_MAX)))

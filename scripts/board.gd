@@ -4,7 +4,6 @@ const TILE_SCENE: PackedScene = preload("res://scenes/tile.tscn")
 
 signal changed
 var tiles: Array[Tile]
-var last_slide_result: SlideResult
 
 func _init() -> void:
 	tiles.resize(16)
@@ -35,7 +34,6 @@ func slide(horizontal: bool, reverse: bool) -> SlideResult:
 	
 	if result.moved or result.merged:
 		changed.emit()
-		last_slide_result = result
 
 	return result
 
@@ -44,8 +42,9 @@ func slide_row(row: PackedInt32Array) -> bool:
 	var last_empty_idx: int = -1
 	var non_empty_tiles: Array[Tile] = []
 	for i in 4:
-		if tiles[row[i]] != null:
-			non_empty_tiles.push_back(tiles[row[i]])
+		var curr_tile: Tile = tiles[row[i]]
+		if curr_tile != null:
+			non_empty_tiles.push_back(curr_tile)
 			tiles[row[i]] = null
 			if last_empty_idx != -1:
 				move_made = true
