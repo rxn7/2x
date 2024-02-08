@@ -137,7 +137,7 @@ func spawn_random_tile(wait_for_move_animation: bool = true) -> void:
 
 	var index: int = free_indices[randi_range(0, free_indices.size() - 1)]
 	# 90% change to spawn 2, 10% chance to spawn 4
-	var value: int = 512 if randf() >= 0.9 else 256
+	var value: int = 4 if randf() >= 0.9 else 2
 	
 	var tile: Tile = TILE_SCENE.instantiate()
 	tile_container.add_child(tile)

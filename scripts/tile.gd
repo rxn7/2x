@@ -6,7 +6,6 @@ const DOUBLE_ANIMATION_TIME: float = 0.1
 const MOVE_ANIMATION_TIME: float = 0.1
 
 const MERGE_PARTICLES_SCENE: PackedScene = preload("res://scenes/merge_particles.tscn")
-const MERGE_PARTICLES_MOBILE_SCENE: PackedScene = preload("res://scenes/merge_particles.tscn")
 
 const COLOR_MAP: ColorMap = preload("res://resources/color_map.tres")
 const SPAWN_SOUND: AudioStream = preload("res://assets/audio/spawn_tile.wav") 
