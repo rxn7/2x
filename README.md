@@ -1,4 +1,4 @@
-# 2ˣ (aka 2^x, 2-x)
+# 2ˣ (aka 2^x, 2x)
 2048-like game made in Godot 4.2.
 
 # Web export
