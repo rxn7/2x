@@ -1,5 +1,7 @@
 extends Control
 
+const InputAction = preload("res://scripts/game/controls/input_action.gd").InputAction
+
 const FONT_SIZE: int = 16
 const REDRAW_INTERVAL: float = 0.5
 const ALTERNATING_COLORS: Array[Color] = [Color.HOT_PINK, Color.PINK]
@@ -7,6 +9,7 @@ const ALTERNATING_COLORS: Array[Color] = [Color.HOT_PINK, Color.PINK]
 var text_y: float = 0
 var text_x: float = 0
 var alternate_idx: int = 0
+var last_input_action: InputAction
 @export var game: Game
 
 func _ready() -> void:
@@ -14,6 +17,8 @@ func _ready() -> void:
 		visible = false
 		queue_free()
 		return
+
+	GameEvents.input.connect(func(action): last_input_action = action)
 	
 	var redraw_timer = Timer.new()
 	redraw_timer.autostart = true
@@ -46,6 +51,7 @@ func _draw() -> void:
 	draw_debug_string("MSG BUF: %s" % String.humanize_size(Performance.get_monitor(Performance.MEMORY_MESSAGE_BUFFER_MAX)))
 	draw_debug_string("VRAM: %s" % String.humanize_size(Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED)))
 	draw_debug_string("FPS: %d" % Performance.get_monitor(Performance.TIME_FPS))
+	draw_debug_string("LAST INPUT: %s" % InputAction.keys()[last_input_action])
 
 	draw_string(ThemeDB.fallback_font, Vector2(text_x, text_y), "Version: %s" % ProjectSettings.get_setting("application/config/version"), HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE, Color.WHITE_SMOKE)
 
