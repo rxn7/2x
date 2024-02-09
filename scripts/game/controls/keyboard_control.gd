@@ -12,13 +12,13 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			return
 			
 		if event.keycode == KEY_R:
-			Events.input.emit(InputAction.Restart)
+			GameEvents.input.emit(InputAction.Restart)
 
 		elif event.is_action_pressed("slide_up"):
-			Events.input.emit(InputAction.SlideUp)
+			GameEvents.input.emit(InputAction.SlideUp)
 		elif event.is_action_pressed("slide_down"):
-			Events.input.emit(InputAction.SlideDown)
+			GameEvents.input.emit(InputAction.SlideDown)
 		elif event.is_action_pressed("slide_left"):
-			Events.input.emit(InputAction.SlideLeft)
+			GameEvents.input.emit(InputAction.SlideLeft)
 		elif event.is_action_pressed("slide_right"):
-			Events.input.emit(InputAction.SlideRight)
+			GameEvents.input.emit(InputAction.SlideRight)

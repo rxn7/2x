@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://m8cpsxur4qk"]
+[gd_scene load_steps=12 format=3 uid="uid://m8cpsxur4qk"]
 
 [ext_resource type="PackedScene" uid="uid://cj8igw0yycx66" path="res://scenes/grid_cell.tscn" id="1_4g0en"]
 [ext_resource type="Script" path="res://scripts/game/game.gd" id="1_dciia"]
@@ -9,6 +9,15 @@
 [ext_resource type="Script" path="res://scripts/game/controls/mobile_control.gd" id="7_qt0g4"]
 [ext_resource type="Script" path="res://scripts/game/controls/keyboard_control.gd" id="8_7x6aj"]
 [ext_resource type="Script" path="res://scripts/ui/debug.gd" id="9_5147w"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_t1j4g"]
+font = ExtResource("4_l48nr")
+font_size = 80
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.231373)
+shadow_offset = Vector2(3, 3)
 
 [sub_resource type="LabelSettings" id="LabelSettings_sdouf"]
 font = ExtResource("4_l48nr")
@@ -129,17 +138,34 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("4_0weuj")
 
-[node name="Game" type="Control" parent="UI"]
+[node name="GameOver" type="ColorRect" parent="UI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("4_0weuj")
+color = Color(0, 0, 0, 0.658824)
 
-[node name="Score" type="Label" parent="UI/Game"]
+[node name="Label" type="Label" parent="UI/GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -165.0
+offset_top = -46.0
+offset_right = 165.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over!"
+label_settings = SubResource("LabelSettings_t1j4g")
+
+[node name="Score" type="Label" parent="UI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -159,7 +185,7 @@ label_settings = SubResource("LabelSettings_sdouf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Restart" type="TextureButton" parent="UI/Game"]
+[node name="Restart" type="TextureButton" parent="UI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -178,11 +204,6 @@ size_flags_stretch_ratio = 20.0
 action_mode = 0
 texture_normal = ExtResource("6_bdh0s")
 stretch_mode = 5
-
-[node name="GameOver" type="Control" parent="UI"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="Controls" type="Node" parent="."]
 

@@ -10,19 +10,24 @@ var score: int = 0:
 	set(value):
 		var change: int = value - score
 		score = value
-		Events.score_changed.emit(value, change)
+		GameEvents.score_changed.emit(value, change)
 
 func _ready() -> void:
-	Events.input.connect(on_input)
+	GameEvents.input.connect(on_input)
 	board.tile_merged.connect(func(value: int): score += value)
 
 	# Wait for the next frame, grid container items positions are not calculated yet: https://github.com/godotengine/godot/issues/72024
 	await get_tree().process_frame
 	restart()
 
+func game_over() -> void:
+	GameEvents.game_over.emit()
+
 func restart() -> void:
+	freeze = false
 	score = 0
 	board.restart()
+	GameEvents.game_start.emit()
 	SoundManager.play_spawn_sound()
 
 func on_input(action: InputAction) -> void:
@@ -44,16 +49,15 @@ func on_input(action: InputAction) -> void:
 func slide(horizontal: bool, reverse: bool) -> void:
 	var result: SlideResult = board.slide(horizontal, reverse)
 
-	if result.moved:
-		board.spawn_random_tile(true)
-
-		if !board.is_any_move_possible():
-			restart()
-
 	if result.merged:
 		SoundManager.play_merge_sound()
 	elif result.moved:
 		SoundManager.play_spawn_sound()
+
+	if result.moved or result.merged:
+		board.spawn_random_tile(true)
+		if !board.is_any_move_possible():
+			game_over()
 
 func slide_up(): slide(false, false)
 func slide_down(): slide(false, true)

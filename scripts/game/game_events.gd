@@ -4,3 +4,5 @@ const InputAction = preload("res://scripts/game/controls/input_action.gd").Input
 
 signal input(action: InputAction)
 signal score_changed(score: int, change: int)
+signal game_over
+signal game_start

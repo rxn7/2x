@@ -24,12 +24,12 @@ func _input(event: InputEvent):
 		if abs(swipe.x) > SWIPE_THRESHOLD:
 			swiping = false
 			if swipe.x > 0:
-				Events.input.emit(InputAction.SlideRight)
+				GameEvents.input.emit(InputAction.SlideRight)
 			else:
-				Events.input.emit(InputAction.SlideLeft)
+				GameEvents.input.emit(InputAction.SlideLeft)
 		elif abs(swipe.y) > SWIPE_THRESHOLD:
 			swiping = false
 			if swipe.y < 0:
-				Events.input.emit(InputAction.SlideUp)
+				GameEvents.input.emit(InputAction.SlideUp)
 			else:
-				Events.input.emit(InputAction.SlideDown)
+				GameEvents.input.emit(InputAction.SlideDown)

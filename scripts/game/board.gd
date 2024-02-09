@@ -15,12 +15,12 @@ func _init(_game: Game, _tile_container: Node) -> void:
 	tiles.resize(16)
 
 func restart() -> void:
-	for t in tiles:
+	for t: Tile in tiles:
 		if t != null:
 			t.queue_free()
 	tiles.fill(null)
 	
-	for i in 2:
+	for i: int in 2:
 		spawn_random_tile(false)
 
 	changed.emit()
@@ -32,7 +32,7 @@ func remove_tile(idx: int) -> void:
 func slide(horizontal: bool, reverse: bool) -> SlideResult:
 	var result: SlideResult = SlideResult.new()
 
-	for row in generate_slide_rows(horizontal, reverse):
+	for row: PackedInt32Array in generate_slide_rows(horizontal, reverse):
 		result.moved = slide_row(row) or result.moved
 		result.merged = merge_row(row) or result.merged
 		result.moved = slide_row(row) or result.moved
@@ -46,7 +46,7 @@ func slide_row(row: PackedInt32Array) -> bool:
 	var move_made: bool = false
 	var last_empty_idx: int = -1
 	var non_empty_tiles: Array[Tile] = []
-	for i in 4:
+	for i: int in 4:
 		var curr_tile: Tile = tiles[row[i]]
 		if curr_tile != null:
 			non_empty_tiles.push_back(curr_tile)
@@ -56,7 +56,7 @@ func slide_row(row: PackedInt32Array) -> bool:
 		elif last_empty_idx == -1:
 			last_empty_idx = i
 
-	for i in range(non_empty_tiles.size()):
+	for i: int in non_empty_tiles.size():
 		var tile: Tile = non_empty_tiles[i]
 		tiles[row[i]] = tile
 		tile.update_position(game.grid_container.get_child(row[i]))
@@ -66,15 +66,15 @@ func slide_row(row: PackedInt32Array) -> bool:
 func generate_slide_rows(horizontal: bool, reverse: bool) -> Array[PackedInt32Array]:
 	var rows: Array[PackedInt32Array] = []
 	rows.resize(4)
-	for i in 4:
+	for i: int in 4:
 		var row: PackedInt32Array = []
 		row.resize(4)
 
 		if reverse:
-			for j in range(3, -1, -1):
+			for j: int in range(3, -1, -1):
 				row[3-j] = (Board.xy_to_index(j, i) if horizontal else Board.xy_to_index(i, j))
 		else:
-			for j in 4:
+			for j: int in 4:
 				row[j] = (Board.xy_to_index(j, i) if horizontal else Board.xy_to_index(i, j))
 
 		rows[i] = row
@@ -83,7 +83,7 @@ func generate_slide_rows(horizontal: bool, reverse: bool) -> Array[PackedInt32Ar
 
 func merge_row(row: PackedInt32Array) -> bool:
 	var merged: bool = false
-	for i in 3:
+	for i: int in 3:
 		var curr_tile: Tile = tiles[row[i]]
 		var next_tile: Tile = tiles[row[i + 1]]
 
@@ -104,7 +104,7 @@ func spawn_random_tile(wait_for_move_animation: bool = true) -> void:
 	var free_indices: PackedInt32Array = []
 
 	# Find empty cells
-	for idx in 16:
+	for idx: int in 16:
 		if tiles[idx] == null:
 			free_indices.push_back(idx)
 			
@@ -125,8 +125,8 @@ func spawn_random_tile(wait_for_move_animation: bool = true) -> void:
 	tile.value = value
 
 func is_any_move_possible() -> bool:
-	for x in range(4):
-		for y in range(4):
+	for x: int in range(4):
+		for y: int in range(4):
 			var curr_tile: Tile = tiles[Board.xy_to_index(x, y)]
 
 			# Empty cell is available

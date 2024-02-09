@@ -31,15 +31,7 @@ func _draw() -> void:
 	text_y = FONT_SIZE
 	text_x = 0
 
-	for y in 4:
-		for x in 4:
-			var tile: Tile = game.board.tiles[Board.xy_to_index(x, y)] 
-			var text: String
-
-			text = "[0000]" if tile == null else "[%04d]" % tile.value
-			draw_string(ThemeDB.fallback_font, Vector2(x * 60, text_y), text, HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE, tile.get_color() if tile != null else Color.WHITE)
-
-		text_y += FONT_SIZE
+	draw_grid()
 
 	text_y = get_viewport().get_visible_rect().size.y
 	text_x = 0
@@ -54,6 +46,19 @@ func _draw() -> void:
 	draw_debug_string("MSG BUF: %s" % String.humanize_size(Performance.get_monitor(Performance.MEMORY_MESSAGE_BUFFER_MAX)))
 	draw_debug_string("VRAM: %s" % String.humanize_size(Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED)))
 	draw_debug_string("FPS: %d" % Performance.get_monitor(Performance.TIME_FPS))
+
+	draw_string(ThemeDB.fallback_font, Vector2(text_x, text_y), "Version: %s" % ProjectSettings.get_setting("application/config/version"), HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE, Color.WHITE_SMOKE)
+
+func draw_grid() -> void:
+	for y: int in 4:
+		for x: int in 4:
+			var tile: Tile = game.board.tiles[Board.xy_to_index(x, y)] 
+			var text: String
+
+			text = "[0000]" if tile == null else "[%04d]" % tile.value
+			draw_string(ThemeDB.fallback_font, Vector2(x * 60, text_y), text, HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE, tile.get_color() if tile != null else Color.WHITE)
+
+		text_y += FONT_SIZE
 
 func draw_debug_string(text: String, color: Color = get_alternating_color()) -> void:
 	draw_string(ThemeDB.fallback_font, Vector2(text_x, text_y), text, HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE, color)
