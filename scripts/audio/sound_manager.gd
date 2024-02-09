@@ -30,7 +30,7 @@ func play_spawn_sound() -> void:
 	play(Sound.new(SoundLibrary.SPAWN_SOUNDS.pick_random(), randf_range(0.7, 1.3)))
 
 func play_merge_sound() -> void:
-	play(Sound.new(SoundLibrary.MERGE_SOUND, randf_range(0.7, 1.3)))
+	play(Sound.new(SoundLibrary.MERGE_SOUND, randf_range(0.5, 1.5)))
 
 func create_new_player() -> AudioStreamPlayer:
 	pool_size += 1

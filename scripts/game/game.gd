@@ -26,6 +26,7 @@ func _ready() -> void:
 	restart()
 
 func game_over() -> void:
+	SoundManager.play(Sound.new(SoundLibrary.GAME_OVER_SOUND, 1.0))
 	GameEvents.game_over.emit()
 
 func restart() -> void:
@@ -39,16 +40,11 @@ func on_input(action: InputAction) -> void:
 		return
 
 	match action:
-		InputAction.SlideUp:
-			slide_up()
-		InputAction.SlideDown:
-			slide_down()
-		InputAction.SlideLeft:
-			slide_left()
-		InputAction.SlideRight:
-			slide_right()
-		InputAction.Restart:
-			restart()
+		InputAction.SlideUp: slide(false, false)
+		InputAction.SlideDown: slide(false, true)
+		InputAction.SlideLeft: slide(true, false)
+		InputAction.SlideRight: slide(true, true)
+		InputAction.Restart: restart()
 
 func slide(horizontal: bool, reverse: bool) -> void:
 	var result: SlideResult = board.slide(horizontal, reverse)
@@ -57,8 +53,3 @@ func slide(horizontal: bool, reverse: bool) -> void:
 		board.spawn_random_tile(true)
 		if !board.is_any_move_possible():
 			game_over()
-
-func slide_up(): slide(false, false)
-func slide_down(): slide(false, true)
-func slide_left(): slide(true, false)
-func slide_right(): slide(true, true)
