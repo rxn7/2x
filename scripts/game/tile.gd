@@ -44,7 +44,7 @@ func play_merge_effects() -> void:
 
 func update_position(target_cell: Control) -> void:
 	var just_appeared: bool = value == 0
-	target_position = target_cell.global_position - Vector2(size.x - target_cell.size.x, size.y - target_cell.size.y)
+	target_position = target_cell.global_position - Vector2(size.x - target_cell.size.x, size.y - target_cell.size.y) * 0.5
 	if just_appeared:
 		position = target_position
 	else:
