@@ -8,6 +8,7 @@ echo "Project version: $project_version"
 build_and_push_for_platform() {
     platform=$1
     target_dir=$2
+    push_full_dir="${3:-true}"
 
     printf "\n\n"
     echo -e "\033[0;92mBuilding the project for $1 to $2\033[0m"
@@ -21,7 +22,8 @@ build_and_push_for_platform() {
         printf "\n\n"
         echo -e "\033[0;92mSuccessfully build for $platform, now pushing it to itch.\033[0m"
         printf "\n\n"
-        butler push $(dirname $target_dir) "$butler_name:$platform" --userversion $project_version
+        if [ $push_full_dir = true ]; then push_dir=$(dirname $target_dir); else push_dir=$target_dir; fi
+        butler push $push_dir "$butler_name:$platform" --userversion $project_version
     else
         printf "\n\n"
         echo -e "\033[0;91mFailed to build for $platform\033[0m"
@@ -30,9 +32,9 @@ build_and_push_for_platform() {
 }
 
 build_and_push_for_platform "Web" ./builds/web/index.html
-build_and_push_for_platform "Android" ./builds/android/2x.apk
-build_and_push_for_platform "Linux" ./builds/linux/2x.x86_64
-build_and_push_for_platform "Windows" ./builds/windows/2x.exe
+build_and_push_for_platform "Android" ./builds/android/2x.apk false
+build_and_push_for_platform "Linux" ./builds/linux/2x.x86_64 false
+build_and_push_for_platform "Windows" ./builds/windows/2x.exe false
 
 project_version=$(echo $project_version | awk -F. '{$NF = $NF + 1;} 1' OFS=. | sed 's/^\./0./') 
 echo "New project version: $project_version"

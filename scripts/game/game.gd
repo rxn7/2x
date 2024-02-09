@@ -10,6 +10,11 @@ var score: int = 0:
 	set(value):
 		var change: int = value - score
 		score = value
+		if SaveSystem.data.best_score < score:
+			SaveSystem.data.best_score = score
+			SaveSystem.save_data()
+			GameEvents.best_score_changed.emit(score)
+
 		GameEvents.score_changed.emit(value, change)
 
 func _ready() -> void:
@@ -28,7 +33,6 @@ func restart() -> void:
 	score = 0
 	board.restart()
 	GameEvents.game_start.emit()
-	SoundManager.play_spawn_sound()
 
 func on_input(action: InputAction) -> void:
 	if freeze:
@@ -48,11 +52,6 @@ func on_input(action: InputAction) -> void:
 
 func slide(horizontal: bool, reverse: bool) -> void:
 	var result: SlideResult = board.slide(horizontal, reverse)
-
-	if result.merged:
-		SoundManager.play_merge_sound()
-	elif result.moved:
-		SoundManager.play_spawn_sound()
 
 	if result.moved or result.merged:
 		board.spawn_random_tile(true)
