@@ -26,7 +26,7 @@ func _ready() -> void:
 	restart()
 
 func game_over() -> void:
-	SoundManager.play(Sound.new(SoundLibrary.GAME_OVER_SOUND, 1.0))
+	SoundManager.play(SoundLibrary.GAME_OVER_SOUND)
 	GameEvents.game_over.emit()
 
 func restart() -> void:

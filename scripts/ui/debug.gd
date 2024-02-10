@@ -12,12 +12,12 @@ var alternate_idx: int = 0
 var last_input_action: InputAction
 @export var game: Game
 
-func _ready() -> void:
+func _init():
 	if !OS.has_feature("debug"):
 		visible = false
 		queue_free()
-		return
 
+func _ready() -> void:
 	GameEvents.input.connect(func(action): last_input_action = action)
 	
 	var redraw_timer = Timer.new()
@@ -41,16 +41,13 @@ func _draw() -> void:
 	text_y = get_viewport().get_visible_rect().size.y
 	text_x = 0
 
-	draw_debug_string("GPU: %s" % RenderingServer.get_video_adapter_name())
-	draw_debug_string("CPU: %s" % OS.get_processor_name())
-
+	draw_debug_string("SYSTEM: %s, %s" % [RenderingServer.get_video_adapter_name(), OS.get_processor_name()])
 	draw_debug_string("OBJECTS: %d (NODES: %d)" % [Performance.get_monitor(Performance.OBJECT_COUNT), Performance.get_monitor(Performance.OBJECT_NODE_COUNT)])
 	draw_debug_string("AUDIO POOL: %d (%d PLAYING)" % [SoundManager.pool_size, SoundManager.playing_count])
-	draw_debug_string("STAT MEM: %s (MAX: %s)" % [String.humanize_size(Performance.get_monitor(Performance.MEMORY_STATIC)), String.humanize_size(Performance.get_monitor(Performance.MEMORY_STATIC_MAX))])
-	draw_debug_string("RENDER BUF: %s" % String.humanize_size(Performance.get_monitor(Performance.RENDER_BUFFER_MEM_USED)))
-	draw_debug_string("MSG BUF: %s" % String.humanize_size(Performance.get_monitor(Performance.MEMORY_MESSAGE_BUFFER_MAX)))
+	draw_debug_string("STATIC: %s (MAX: %s)" % [String.humanize_size(Performance.get_monitor(Performance.MEMORY_STATIC)), String.humanize_size(Performance.get_monitor(Performance.MEMORY_STATIC_MAX))])
 	draw_debug_string("VRAM: %s" % String.humanize_size(Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED)))
 	draw_debug_string("FPS: %d" % Performance.get_monitor(Performance.TIME_FPS))
+
 	draw_debug_string("LAST INPUT: %s" % InputAction.keys()[last_input_action])
 
 	draw_string(ThemeDB.fallback_font, Vector2(text_x, text_y), "Version: %s" % ProjectSettings.get_setting("application/config/version"), HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE, Color.WHITE_SMOKE)
